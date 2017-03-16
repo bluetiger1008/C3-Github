@@ -1,0 +1,25 @@
+.header {
+	position: relative;
+	img.background {
+		width: 100%;
+	}
+	.title {
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		transform: translate(0%, -50%);
+		color: white;
+		text-align: center;
+		.logo {
+			text-align: left;
+			img {
+				float: left;
+				margin-top: 20px;
+				margin-right: 20px;
+			}	
+			h2 {
+				display: inline-block;
+			}
+		}
+	}
+}

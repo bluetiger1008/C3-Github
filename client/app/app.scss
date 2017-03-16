@@ -9,6 +9,8 @@ $fa-font-path: '/assets/fonts/font-awesome/';
 /**
  * App-wide Styles
  */
+$blue-color : #1b6cd5;
+$light-grey: #ddd;
 
 .browserupgrade {
   margin: 0.2em 0;
@@ -17,11 +19,23 @@ $fa-font-path: '/assets/fonts/font-awesome/';
   padding: 0.2em 0;
 }
 
+.page-title {
+  	background: $blue-color;
+  	color: white;
+  	font-size: 25px;
+  	text-align: center;
+  	padding: 10px 0;
+}
+
+.page-content {
+	
+}
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
 @import 'main/main';
 @import '../components/footer/footer';
+@import '../components/header/header';
 @import '../components/modal/modal';
 @import '../components/oauth-buttons/oauth-buttons';
 /* endinject */

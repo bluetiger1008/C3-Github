@@ -1,3 +1,23 @@
+.landing-page {
+  text-align: center;
+  .txt-description {
+    text-align: left;
+  }
+  .txt-workflow {
+    display: inline-block;
+    text-align: left;
+  }
+  .section_auth {
+    text-align: left;
+    background: $light-grey;
+    padding: 10px 0;
+    h2 {
+      text-align: center;
+    }
+  }
+}
+
+
 .thing-form {
   margin: 20px 0;
 }
