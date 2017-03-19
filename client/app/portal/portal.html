@@ -1,0 +1,81 @@
+<div class="page-content pg-portal">
+	<div class="model-format">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="input-group">
+			          <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="$ctrl.popup2.opened" datepicker-options="$ctrl.dateOptions" ng-required="true" close-text="Close" />
+			          <span class="input-group-btn">
+			            <button type="button" class="btn btn-default" ng-click="$ctrl.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+			          </span>
+			        </div>
+			    </div>
+			    <div class="col-md-3">
+				    <div class="form-group">
+			    		<select ng-model="$ctrl.makeType" ng-options="x for x in $ctrl.makeTypes" class="form-control">
+						</select>
+					</div>
+			    </div>
+			    <div class="col-md-3">
+			    	<div class="form-group">
+			    		<select ng-model="$ctrl.modelType" ng-options="x for x in $ctrl.modelTypes" class="form-control">
+						</select>
+					</div>
+			    </div>
+		    </div>
+		</div>
+	</div>
+
+	<div class="tb-portal">
+		<div class="td-title">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<p>Technology</p>
+					</div>
+					<div class="col-md-4">
+						<p>Deactivation Procedure</p>
+					</div>
+					<div class="col-md-3">
+						<p>Images</p>
+					</div>
+					<div class="col-md-3">
+						<p>Videos</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="td-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="td">
+							<p style="font-weight: bold;">System Description<br/>or Name</p>
+						</div>
+ 					</div>
+					<div class="col-md-4">
+						<div class="td">
+							<p>Description text goes here</p>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="td">
+							<p>Place Image Here</p>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="td">
+							<p>Load YouTube<br/>Tutorials Here</p>
+							<img src="/assets/images/player.png">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<br/>
+						<button class="btn btn-primary" ng-click="$ctrl.addRow">Add Row</button>
+						<br/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

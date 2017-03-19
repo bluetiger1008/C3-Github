@@ -37,7 +37,7 @@ export class LoginComponent {
         .then(() => {
           // Logged in, redirect to home
           console.log('loggedin');
-          this.$state.go('main');
+          this.$state.go('portal');
         })
         .catch(err => {
           console.log('error');

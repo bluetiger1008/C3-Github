@@ -37,7 +37,7 @@ export class SignupComponent {
       })
         .then(() => {
           // Account created, redirect to home
-          this.$state.go('main');
+          this.$state.go('portal');
         })
         .catch(err => {
           err = err.data;

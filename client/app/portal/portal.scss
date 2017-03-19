@@ -1,0 +1,37 @@
+.pg-portal {
+	.model-format {
+		padding: 20px 0;
+		background: $blue-color;
+	}
+	.form-group {
+		margin: 0;
+	}
+	.td-title {
+		text-align: center;
+		padding: 10px 0;
+		background: $dark-blue;
+		color: white;
+		p {
+			margin: 0;
+		}
+	}
+	.td-content {
+		background: $light-grey;
+		padding: 10px 0;
+		.td {
+			background: white;
+			padding: 5px;
+			color: orange;
+			height: 100px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			img {
+				margin-left: 10px;
+				width: 80px;
+			}
+		}
+		.btn-add {
+		}
+	}
+}
