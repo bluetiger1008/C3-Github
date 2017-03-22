@@ -9,6 +9,7 @@ import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
+import 'angular-xeditable';
 // import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
@@ -34,12 +35,13 @@ import socket from '../components/socket/socket.service';
 import './app.scss';
 
 angular.module('icaApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, navbar, header, footer, login, signup, main, portal, constants, socket, util
+  uiBootstrap, 'xeditable', _Auth, account, admin, navbar, header, footer, login, signup, main, portal, constants, socket, util
 ])
   .config(routeConfig)
-  .run(function($rootScope, $location, Auth) {
+  .run(function($rootScope, $location, Auth, editableOptions) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
+    editableOptions.theme = 'bs3';
 
     $rootScope.$on('$stateChangeStart', function(event, next) {
       Auth.isLoggedIn(function(loggedIn) {
