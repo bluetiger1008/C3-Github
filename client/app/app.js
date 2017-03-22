@@ -5,6 +5,8 @@ import angular from 'angular';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+import ngFileUpload from 'ng-file-upload';
+
 import 'angular-socket-io';
 
 import uiRouter from 'angular-ui-router';
@@ -34,7 +36,7 @@ import socket from '../components/socket/socket.service';
 
 import './app.scss';
 
-angular.module('icaApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
+angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, 'btford.socket-io', uiRouter,
   uiBootstrap, 'xeditable', _Auth, account, admin, navbar, header, footer, login, signup, main, portal, constants, socket, util
 ])
   .config(routeConfig)

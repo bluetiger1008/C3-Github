@@ -33,11 +33,10 @@ $dark-blue: #002452;
 }
 // Component styles are injected through gulp
 /* inject:scss */
-@import 'xeditable.scss';
-
 @import 'admin/admin';
 @import 'main/main';
 @import 'portal/portal';
+@import 'xeditable';
 @import '../components/footer/footer';
 @import '../components/header/header';
 @import '../components/modal/modal';
