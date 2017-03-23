@@ -12,6 +12,13 @@
 
 import jsonpatch from 'fast-json-patch';
 import Model from './model.model';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import config from '../../config/environment';
+import AWS from 'aws-sdk';
+
+global.appRoot = path.resolve(__dirname);
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -114,4 +121,63 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+// upload image
+export function uploadImage(req, res) {
+  var relativePath = '';
+  var upload = multer(config.uploads.imgUpload).single('img');
+  var imgUploadFileFilter = require(path.resolve('server/config/multer')).imgUploadFileFilter;
+  var isStart = false;
+
+  upload(req, res, function (err) {
+    if(err) {
+      return res.end("Error uploading file.");
+    }
+    else {
+        
+      config.uploads.imgUpload.dest.split('/').forEach(function(subStr) {
+        if (subStr === 'uploads') {
+          isStart = true;
+        }
+        if (isStart) {
+          relativePath += '/';
+          relativePath += subStr;
+        }
+      });
+      var imgUrl = relativePath + req.file.filename;
+      console.log(path.join(__dirname, '../..' + imgUrl));
+      
+
+      // res.end(photoUrl);
+      AWS.config.update({accessKeyId: config.aws_access_key_id, secretAccessKey: config.aws_secret_access_key});
+      console.log(appRoot);
+      fs.readFile(path.join(__dirname, '../..' + imgUrl), (err,data) => {
+          if(err) throw err;
+          var s3 = new AWS.S3();
+          var s3_param = {
+             Bucket: 'icaportal',
+             Key: req.file.filename,
+             Expires: 60,
+             ContentType: req.file.mimetype,
+             ACL: 'public-read',
+             Body: data
+          };
+          s3.putObject(s3_param, function(err, data){
+             if(err){
+                console.log(err);
+             } else {
+              var return_data = {
+                 signed_request: data,
+                 url: 'https://s3-us-west-1.amazonaws.com/icaportal/'+req.file.filename
+              }; 
+              console.log('return data - ////////// --------------');
+              console.log(return_data.url);
+              res.end(return_data.url);
+               // return res.render('upload', {data : return_data, title : 'Upload Image : success', message : { type: 'success', messages : [ 'Uploaded Image']}});
+             }
+          });
+      });
+    }
+  });
 }

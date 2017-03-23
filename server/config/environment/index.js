@@ -31,6 +31,10 @@ var all = {
   // Should we populate the DB with sample data?
   seedDB: false,
 
+  //Amazon S3
+  aws_access_key_id : 'AKIAIFZFPDRNAGX5NB6A',//your_access_key;
+  aws_secret_access_key : '7XLbLt7TRX2N0IZWP51eHG7bmhyb9w6CyQCWfvZf',// your_secret_key;
+
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
     session: 'ica-secret'
@@ -61,6 +65,15 @@ var all = {
     clientID: process.env.GOOGLE_ID || 'id',
     clientSecret: process.env.GOOGLE_SECRET || 'secret',
     callbackURL: `${process.env.DOMAIN || ''}/auth/google/callback`
+  },
+
+  uploads: {
+    imgUpload: {
+      dest: path.join(__dirname, '../../uploads/cars/img/model/'), // Profile upload destination path
+      limits: {
+        fileSize: 10 * 1024 * 1024 // Max file size in bytes (1 MB)
+      }
+    },
   }
 };
 

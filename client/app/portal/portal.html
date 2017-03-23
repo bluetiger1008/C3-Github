@@ -64,7 +64,7 @@
 								<div class="img-section">
 									<img class="photo" ngf-thumbnail="model.file">
 			                        <form ng-app="fileUpload" name="form">
-			                          <div class="btn btn-primary" ngf-select="vm.upload($file)" ng-model="model.file" ngf-pattern="'image/*'"
+			                          <div class="btn btn-primary" ngf-select="vm.onImageUpload($file)" ng-model="model.file" ngf-pattern="'image/*'"
 			                            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Place Image Here</div>
 			                          <!-- <button type="submit" ng-click="admin.submit()">submit</button> -->
 			                        </form>

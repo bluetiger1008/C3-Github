@@ -3,21 +3,14 @@
 export default class PortalController {
   
   /*@ngInject*/
-  constructor($http, $scope, socket, Auth, modelFactory) {
+  constructor($http, $scope, Upload, Auth, modelFactory) {
     this.$http = $http;
-    this.socket = socket;
     this.Auth = Auth;
     this.modelFactory = modelFactory;
-
-    $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
-    });
+    this.Upload = Upload;
   }
 
   $onInit() {
-    this.getCurrentUser = this.Auth.getCurrentUserSync;
-    this.currentUser = this.getCurrentUser();
-
     this.modelYears = ['2016', '2017'];
     this.showVideoImg = true;
     this.makeTypes = ['Acura','Alfa Romeo','Aston Martin','Audi','Bentley Motors','BMW','Buick','Cadillac','Chevrolet','Chrysler','Dodge','Ferrari','Fiat','Ford','Geely',
@@ -70,5 +63,24 @@ export default class PortalController {
       }, function error(res){
         console.log('error');
       });
+  }
+
+  onImageUpload(file) {
+    if(file){
+      this.Upload.upload({
+            url: 'api/models/image',
+            data: {img: file}
+        }).then(resp => {
+            console.log('Success ' + resp);
+            
+        }, resp =>{
+            console.log('Error status: ' + resp.status);
+        }, evt => {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.img.name);
+        });
+        // console.log(this.photo);
+
+    }
   }
 }
