@@ -5,6 +5,8 @@ export default function routes($stateProvider) {
 
   $stateProvider.state('portal', {
     url: '/portal',
-    template: '<portal></portal>'
+    template: require('./portal.html'),
+    controller: 'PortalController',
+    controllerAs: 'vm'
   });
 }

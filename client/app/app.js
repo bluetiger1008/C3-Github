@@ -29,14 +29,15 @@ import footer from '../components/footer/footer.component';
 import login from '../components/login/login.component';
 import signup from '../components/signup/signup.component';
 import main from './main/main.component';
-import portal from './portal/portal.component';
+import portal from './portal/';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
+import modelFactory from '../components/factory/model.module';
 
 import './app.scss';
 
-angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, 'btford.socket-io', uiRouter,
+angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, modelFactory, 'btford.socket-io', uiRouter,
   uiBootstrap, 'xeditable', _Auth, account, admin, navbar, header, footer, login, signup, main, portal, constants, socket, util
 ])
   .config(routeConfig)

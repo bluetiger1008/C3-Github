@@ -1,17 +1,13 @@
-import angular from 'angular';
-import uiRouter from 'angular-ui-router';
-import routing from './portal.routes';
+'use strict';
 
-export class PortalController {
-  $http;
-  socket;
-  awesomeThings = [];
-  newThing = '';
-
+export default class PortalController {
+  
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, Auth, modelFactory) {
     this.$http = $http;
     this.socket = socket;
+    this.Auth = Auth;
+    this.modelFactory = modelFactory;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
@@ -19,8 +15,11 @@ export class PortalController {
   }
 
   $onInit() {
-    this.modelYears = ['2016', '2017'];
+    this.getCurrentUser = this.Auth.getCurrentUserSync;
+    this.currentUser = this.getCurrentUser();
 
+    this.modelYears = ['2016', '2017'];
+    this.showVideoImg = true;
     this.makeTypes = ['Acura','Alfa Romeo','Aston Martin','Audi','Bentley Motors','BMW','Buick','Cadillac','Chevrolet','Chrysler','Dodge','Ferrari','Fiat','Ford','Geely',
     'GMC','Honda','Hyundai','Infiniti','Isuzu','Jaguar','Jeep','Kia','Lamborghini','Lancia','Land Rover','Lexus','Lincoln','Lotus','Maserati',
     'Mazda','Mercedes-Benz','MINI','Mitsubishi','Nissan','Peugeot','Porsche','Renault','Rolls-Royce','Smart','Subaru','Suzuki',
@@ -33,7 +32,8 @@ export class PortalController {
       name: '',
       description: '',
       image: '',
-      video: ''
+      video: '',
+      showVideoImg: true
     }];
   }
 
@@ -43,15 +43,32 @@ export class PortalController {
       name: '',
       description: '',
       image: '',
-      video: ''
+      video: '',
+      showVideoImg: true
     });
   }
-}
 
-export default angular.module('icaApp.portal', [uiRouter])
-  .config(routing)
-  .component('portal', {
-    template: require('./portal.html'),
-    controller: PortalController
-  })
-  .name;
+  onVideoLinkClick(id) {
+    this.carModels[id-1].showVideoImg = false;
+  }
+
+  onAfterEditLink(id) {
+    this.carModels[id-1].showVideoImg = true;
+  }
+
+  onSubmit() {
+    var carModels = {
+      modelYear: this.modelYear,
+      makeType: this.makeType,
+      modelType: this.modelType,
+      data: this.carModels
+    };
+
+    this.modelFactory.addModel(carModels)
+      .then(function success(res){
+        console.log('success');
+      }, function error(res){
+        console.log('error');
+      });
+  }
+}
