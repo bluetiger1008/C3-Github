@@ -32,8 +32,8 @@ var all = {
   seedDB: false,
 
   //Amazon S3
-  aws_access_key_id : 'AKIAIFZFPDRNAGX5NB6A',//your_access_key;
-  aws_secret_access_key : '7XLbLt7TRX2N0IZWP51eHG7bmhyb9w6CyQCWfvZf',// your_secret_key;
+  aws_access_key_id : 'AKIAIIADAI6VURLVLZVQ',//your_access_key;
+  aws_secret_access_key : 'mdIQt2GVHl6oDCTehNe/QnE6hAYo8f87NtvPyPVp',// your_secret_key;
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {

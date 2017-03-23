@@ -64,7 +64,7 @@
 								<div class="img-section">
 									<img class="photo" ngf-thumbnail="model.file">
 			                        <form ng-app="fileUpload" name="form">
-			                          <div class="btn btn-primary" ngf-select="vm.onImageUpload($file)" ng-model="model.file" ngf-pattern="'image/*'"
+			                          <div class="btn btn-primary" ngf-select="vm.onImageUpload($file, model.id)" ng-model="model.file" ngf-pattern="'image/*'"
 			                            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Place Image Here</div>
 			                          <!-- <button type="submit" ng-click="admin.submit()">submit</button> -->
 			                        </form>
@@ -72,9 +72,12 @@
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="td">
-								<a href="#" editable-text="model.video" e-label="" ng-click="vm.onVideoLinkClick(model.id)" onaftersave="vm.onAfterEditLink(model.id)" oncancel= "vm.onAfterEditLink(model.id)">{{ model.video || 'Load YouTube Tutorials Here' }}</a>
-								<img class="icon-video" src="/assets/images/player.png" ng-show="model.showVideoImg">
+							<div class="td section-video">
+								<youtube-video video-url="model.video"></youtube-video>
+								<div>
+									<a href="#" editable-text="model.video" e-label="" ng-click="vm.onVideoLinkClick(model.id)" onaftersave="vm.onAfterEditLink(model.id)" oncancel= "vm.onAfterEditLink(model.id)">{{ model.video || 'Load YouTube Tutorials Here' }}</a>
+									<!-- <img class="icon-video" src="/assets/images/player.png" ng-show="model.showVideoImg"> -->
+								</div>
 							</div>
 						</div>
 					</div>

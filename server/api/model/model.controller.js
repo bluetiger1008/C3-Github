@@ -163,13 +163,14 @@ export function uploadImage(req, res) {
              ACL: 'public-read',
              Body: data
           };
+
           s3.putObject(s3_param, function(err, data){
              if(err){
                 console.log(err);
              } else {
               var return_data = {
                  signed_request: data,
-                 url: 'https://s3-us-west-1.amazonaws.com/icaportal/'+req.file.filename
+                 url: 'http://icaportal.s3-website-us-east-1.amazonaws.com/'+req.file.filename
               }; 
               console.log('return data - ////////// --------------');
               console.log(return_data.url);

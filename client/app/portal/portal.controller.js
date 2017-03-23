@@ -65,14 +65,14 @@ export default class PortalController {
       });
   }
 
-  onImageUpload(file) {
+  onImageUpload(file, modelId) {
     if(file){
       this.Upload.upload({
             url: 'api/models/image',
             data: {img: file}
         }).then(resp => {
-            console.log('Success ' + resp);
-            
+            console.log('Success ' , resp);
+            this.carModels[id-1].image = resp.data;
         }, resp =>{
             console.log('Error status: ' + resp.status);
         }, evt => {

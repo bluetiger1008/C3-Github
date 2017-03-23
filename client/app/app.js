@@ -12,6 +12,7 @@ import 'angular-socket-io';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'angular-xeditable';
+import 'angular-youtube-embed';
 // import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
@@ -37,7 +38,7 @@ import modelFactory from '../components/factory/model.module';
 
 import './app.scss';
 
-angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, modelFactory, 'btford.socket-io', uiRouter,
+angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, modelFactory, 'youtube-embed', 'btford.socket-io', uiRouter,
   uiBootstrap, 'xeditable', _Auth, account, admin, navbar, header, footer, login, signup, main, portal, constants, socket, util
 ])
   .config(routeConfig)
