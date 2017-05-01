@@ -13,6 +13,10 @@ $blue-color : #1b6cd5;
 $light-grey: #ddd;
 $dark-blue: #002452;
 
+body {
+  background-color: #ddd;
+}
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -34,8 +38,10 @@ $dark-blue: #002452;
 // Component styles are injected through gulp
 /* inject:scss */
 @import 'admin/admin';
+@import 'authenticate/authenticate';
 @import 'main/main';
 @import 'portal/portal';
+@import 'portal/thanks/thanks';
 @import 'xeditable';
 @import '../components/footer/footer';
 @import '../components/header/header';

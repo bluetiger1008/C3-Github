@@ -26,6 +26,11 @@ export default angular.module('icaApp.modelFactory',[])
 		modelFactory.findModel = function (id) {
 			return $http.get(urlBase + '/' + id);
 		}
+
+		modelFactory.filterModels = function (year, makeType, modelType) {
+			return $http.get(urlBase + '/' + year + '/' + makeType + '/' + modelType);
+		}
+
 		return modelFactory;
 	}])
 	.name;

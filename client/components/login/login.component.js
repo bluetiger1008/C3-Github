@@ -24,6 +24,7 @@ export class LoginComponent {
   constructor(Auth, $state) {
     this.Auth = Auth;
     this.$state = $state;
+    this.isAdmin = Auth.isAdminSync;
   }
 
   login(form) {
@@ -36,11 +37,13 @@ export class LoginComponent {
       })
         .then(() => {
           // Logged in, redirect to home
-          console.log('loggedin');
+          // if(this.isAdmin() == true)
           this.$state.go('portal');
+          // else
+          //   this.$state.go('final');
         })
         .catch(err => {
-          console.log('error');
+          console.log('error', err.message);
           this.errors.login = err.message;
         });
     }

@@ -4,6 +4,9 @@ import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
+// var Mailgun = require('mailgun-js');
+var nodemailer = require('nodemailer');
+
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function(err) {
@@ -35,6 +38,56 @@ export function index(req, res) {
  */
 export function create(req, res) {
   var newUser = new User(req.body);
+  // var mailgun = new Mailgun({
+  //   apiKey: config.mailgun_api_key,
+  //   domain: config.mailgun_domain
+  // });
+  // var data = {
+  //   from: config.mailgun_from_who,
+  //   to: 'rob.superlink@yandex.com',
+  //   subject: 'test mail',
+  //   html: 'this is test'
+  // }
+
+  // mailgun.messages().send(data, function (err, body) {
+  //     //If there is an error, render the error page
+  //     if (err) {
+  //         res.render('error', { error : err});
+  //         console.log("got an error: ", err);
+  //     }
+  //     //Else we can greet    and leave
+  //     else {
+  //         //Here "submitted.jade" is the view file for this landing page 
+  //         //We pass the variable "email" from the url parameter in an object rendered by Jade
+  //         res.render('submitted', { email : 'rob.superlink@yandex.com' });
+  //         console.log(body);
+  //     }
+  // });
+  
+  var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: 'smartwebartisan@gmail.com', // Your email id
+          pass: 'rangorango99' // Your password
+      }
+  });
+
+  var mailOptions = {
+      from: '"ryan lee" <jmslee1008@aol.com>', // sender address
+      to: 'rob.superlink@yandex.com', // list of receivers
+      subject: 'Email Example', // Subject line
+      text: 'stress',
+      html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+          console.log(error);         
+      }else{
+          console.log('Message sent: ' + info.response);
+      };
+  });
+
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save()

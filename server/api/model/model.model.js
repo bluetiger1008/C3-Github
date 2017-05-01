@@ -10,12 +10,12 @@ var ModelSchema = new mongoose.Schema({
   modelYear: String,
   makeType: String,
   modelType: String,
-  data: [{
+  data: {
   	name: String,
   	description: String,
   	image: String,
   	video: String,
-  }]
+  }
 });
 
 export default mongoose.model('Model', ModelSchema);

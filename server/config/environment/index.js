@@ -32,9 +32,14 @@ var all = {
   seedDB: false,
 
   //Amazon S3
-  aws_access_key_id : 'AKIAIIADAI6VURLVLZVQ',//your_access_key;
-  aws_secret_access_key : 'mdIQt2GVHl6oDCTehNe/QnE6hAYo8f87NtvPyPVp',// your_secret_key;
+  aws_access_key_id : 'AKIAJARFDMQEY6C3NUCQ',//your_access_key;
+  aws_secret_access_key : '1amRr1FPsTLewjD1vyI0svR2Wqd0RwxEf6e8jxND',// your_secret_key;
 
+  //mailgun config
+  mailgun_api_key: 'key-871c5a258129666f1a9281f807de4a1b',
+  mailgun_domain: 'sandboxab91b296688543c5ac3046e8e18926fa.mailgun.org',
+  mailgun_from_who: 'postmaster@sandboxab91b296688543c5ac3046e8e18926fa.mailgun.org',
+  
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
     session: 'ica-secret'

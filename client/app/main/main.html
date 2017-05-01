@@ -1,61 +1,80 @@
-<div class="page-title">
-  <p>Welcome to the ICA Vehicle Manufacturer's Portal <br/>
-  Thanks for helping us help your customers maintain their cars!</p>
-</div>
+<div class="page-content pg-portal pg-main">
+	<div class="model-format">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+			    		<select ng-model="vm.modelYear" ng-options="x for x in vm.modelYears" class="form-control" ng-change="vm.onSearchChange()">
+						</select>
+					</div>
+			    </div>
+			    <div class="col-md-3">
+				    <div class="form-group">
+			    		<select ng-model="vm.makeType" ng-options="x for x in vm.makeTypes" class="form-control" ng-change="vm.onSearchChange()">
+						</select>
+					</div>
+			    </div>
+			    <div class="col-md-3">
+			    	<div class="form-group">
+			    		<select ng-model="vm.modelType" ng-options="x for x in vm.modelTypes" class="form-control" ng-change="vm.onSearchChange()">
+						</select>
+					</div>
+			    </div>
+			    <div class="col-md-3">
+			    	<button class="btn btn-default" ui-sref="authenticate" ng-hide="vm.currentUser.email != ''">Log In</button>
+			    	<button class="btn btn-danger" ui-sref="logout" ng-show="vm.currentUser.email != ''">Log out</button>
+			    	<button class="btn btn-default" ui-sref="portal" ng-show="vm.currentUser.email != ''">Add Models</button>
+			    </div>
+		    </div>
+		</div>
+	</div>
 
-<div class="page-content pg-landing">
-  <div class="container">
-    <div class="row txt-description">
-      <br/>
-      <p>This website will be used by car wash employees to understand the ADAS, transmission and other safety technology included in your vehicles with the goal of educating them on the proper deactivation procedures for car wash preparation. <br/><br/>
-      Your participation in this site will help car wash operators maintain productivity while helping your customers maintain their vehicles. Your reward is in seeing your brand’s products clean and beautiful as they roll down the road.
-      </p>
-    </div>
-
-    <div class="row txt-workflow">
-      <h3>It is simple to load your technology deactivation content:</h3>
-      <ol>
-        <li>Create a Login and Password for secure entry of your data</li>
-        <li>Insert Year, Make and Model of vehicle</li>
-        <li>Insert name of technology</li>
-        <li>Insert deactivation instructions</li>
-        <li>Provide supporting photos or illustrations</li>
-        <li>Provide supporting YouTube tutorials</li>
-      </ol>
-      <br/>
-    </div>
-    <!-- <div class="row">
-      <div class="col-lg-12">
-        <h1 class="page-header">Features:</h1>
-        <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
-          <li><a href="#" uib-tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="$ctrl.deleteThing(thing)">&times;</button></a></li>
-        </ul>
-      </div>
-    </div>
-
-    <form class="thing-form">
-      <label>Syncs in realtime across clients</label>
-      <p class="input-group">
-        <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="$ctrl.newThing">
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary" ng-click="$ctrl.addThing()">Add New</button>
-        </span>
-      </p>
-    </form> -->
-  </div>
-  <div class="section_auth">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>User Login</h2>
-          <login></login>
-        </div>
-        <div class="col-md-6">
-          <h2>New to ICA? Register Here</h2>
-          <signup></signup>
-        </div>
-      </div>
-      <br/>
-    </div>
-  </div>
+	<div class="tb-portal">
+		<div class="td-title">
+			<div class="container">
+				<div class="title-sysname">
+					<p>Technology</p>
+				</div>
+				<div class="title-descr">
+					<p>Deactivation Procedure</p>
+				</div>
+				<div class="title-img">
+					<p>Images</p>
+				</div>
+				<div class="title-video">
+					<p>Videos</p>
+				</div>
+			</div>
+		</div>
+		<div class="td-content">
+			<div class="container">
+				<div class="model" ng-repeat="model in vm.carModels">
+					<div class="model-display">
+						<div class="partial-sysname">
+							<div class="td">
+								<p>{{model.data.name}}</p>
+							</div>
+	 					</div>
+						<div class="partial-descr">
+							<div class="td">
+								<p>{{model.data.description}}</p>
+							</div>
+						</div>
+						<div class="partial-img">
+							<div class="td">
+								<div class="img-section">
+									<img class="photo" ng-src="{{model.data.image}}">
+			                    </div>
+							</div>
+						</div>
+						<div class="partial-video">
+							<div class="td section-video">
+								<youtube-video video-url="model.data.video"></youtube-video>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

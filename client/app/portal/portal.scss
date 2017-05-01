@@ -2,6 +2,13 @@
 	.model-format {
 		padding: 20px 0;
 		background: $blue-color;
+		.lb-selector {
+			color: white;
+			margin: 10px;
+		}
+		select{
+			color: $blue-color;
+		}
 	}
 	.form-group {
 		margin: 0;
@@ -16,19 +23,56 @@
 			p {
 				margin: 0;
 			}
+			.container {
+				display: flex;
+				justify-content: space-between;
+				.title-sysname {	
+					width: 15%;
+				}
+				.title-descr {
+					width: 30%;
+				}
+				.title-img {
+					width: 25%;
+				}
+				.title-video {
+					width: 25%;
+				}
+			}
 		}
 		.td-content {
 			background: $light-grey;
 			padding: 10px 0;
 			.model {
 				margin: 5px 0;
+				.model-display {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: space-between;
+					.partial-sysname {
+						background: white;
+						width: 15%;
+					}
+					.partial-descr {
+						background: white;
+						width: 30%;
+					}
+					.partial-img {
+						background: white;
+						width: 25%;
+					}
+					.partial-video {
+						background: white;
+						width: 25%;
+					}
+				}
 				.td {
-					background: white;
 					padding: 5px;
 					color: orange;
 					min-height: 100px;
 					display: flex;
 					align-items: center;
+					height: 100%;
 					justify-content: center;
 					&.section-video {
 						flex-direction: column;
@@ -57,7 +101,10 @@
 						text-align: center;
 					}
 					.editable {
+						color: $blue-color;
+						font-style: normal !important;
 						pre {
+							color: $blue-color;
 							margin: 0;
 							background: none;
 							border: none;

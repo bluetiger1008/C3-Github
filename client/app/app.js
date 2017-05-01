@@ -29,17 +29,22 @@ import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import login from '../components/login/login.component';
 import signup from '../components/signup/signup.component';
-import main from './main/main.component';
+import main from './main/';
 import portal from './portal/';
+import thanks from './portal/thanks/';
+import authenticate from './authenticate/';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import modelFactory from '../components/factory/model.module';
+import modelTypeFactory from '../components/factory/modelType.module';
+import mainService from '../components/service/main_service.js';
+
 
 import './app.scss';
 
-angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, modelFactory, 'youtube-embed', 'btford.socket-io', uiRouter,
-  uiBootstrap, 'xeditable', _Auth, account, admin, navbar, header, footer, login, signup, main, portal, constants, socket, util
+angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, modelFactory, modelTypeFactory, 'youtube-embed', 'btford.socket-io', uiRouter,
+  uiBootstrap, 'xeditable', _Auth, mainService, account, admin, navbar, header, footer, login, signup, authenticate, main, portal, thanks, constants, socket, util
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth, editableOptions) {
@@ -50,7 +55,7 @@ angular.module('icaApp', [ngCookies, ngResource, ngSanitize, ngFileUpload, model
     $rootScope.$on('$stateChangeStart', function(event, next) {
       Auth.isLoggedIn(function(loggedIn) {
         if(next.authenticate && !loggedIn) {
-          $location.path('/login');
+          $location.path('/');
         }
       });
     });

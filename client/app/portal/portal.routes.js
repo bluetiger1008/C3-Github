@@ -7,7 +7,14 @@ export default function routes($stateProvider) {
     url: '/portal',
     template: require('./portal.html'),
     controller: 'PortalController',
-    controllerAs: 'vm',
+    controllerAs: 'admin',
     authenticate: true
-  });
+  })
+  	.state('thanks', {
+  		url: '/thanks',
+  		template: require('./thanks/thanks.html'),
+  		controller: 'ThanksController',
+  		controllerAs: 'admin',
+  		authenticate: true
+  	});
 }

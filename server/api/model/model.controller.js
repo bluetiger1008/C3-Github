@@ -85,6 +85,30 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+// Filter models from the DB
+export function filter(req, res) {
+  if(req.params.makeType == 'All' && req.params.modelType == 'All')
+    return Model.find({modelYear: req.params.year}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+  else if (req.params.makeType == 'All' && req.params.modelType != 'All')
+    return Model.find({modelYear: req.params.year, modelType: req.params.modelType}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+  else if (req.params.makeType != 'All' && req.params.modelType == 'All')
+    return Model.find({modelYear: req.params.year, makeType: req.params.makeType}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+  else
+    return Model.find({modelYear: req.params.year, makeType: req.params.makeType, modelType: req.params.modelType}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Model in the DB
 export function create(req, res) {
   return Model.create(req.body)
@@ -170,7 +194,7 @@ export function uploadImage(req, res) {
              } else {
               var return_data = {
                  signed_request: data,
-                 url: 'http://icaportal.s3-website-us-east-1.amazonaws.com/'+req.file.filename
+                 url: 'https://s3.amazonaws.com/icaportal/'+req.file.filename
               }; 
               console.log('return data - ////////// --------------');
               console.log(return_data.url);

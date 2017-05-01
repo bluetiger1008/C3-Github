@@ -4,21 +4,28 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="form-group">
-			    		<select ng-model="vm.modelYear" ng-options="x for x in vm.modelYears" class="form-control">
+			    		<select ng-model="admin.modelYear" ng-options="x for x in admin.modelYears" class="form-control">
 						</select>
 					</div>
 			    </div>
 			    <div class="col-md-3">
 				    <div class="form-group">
-			    		<select ng-model="vm.makeType" ng-options="x for x in vm.makeTypes" class="form-control">
+			    		<select ng-model="admin.makeType" ng-options="x for x in admin.makeTypes" class="form-control" ng-change="admin.changeStatus()">
+			    			<option value='' disabled selected>Select Brand</option>
 						</select>
 					</div>
 			    </div>
 			    <div class="col-md-3">
 			    	<div class="form-group">
-			    		<select ng-model="vm.modelType" ng-options="x for x in vm.modelTypes" class="form-control">
+			    		<select ng-model="admin.modelType" ng-options="x for x in admin.modelTypes" class="form-control" ng-change="admin.changeStatus()">
+			    			<option value='' disabled selected>Load Model Names</option>
 						</select>
 					</div>
+			    </div>
+			    <div class="col-md-3">
+			    	<button class="btn btn-danger" ui-sref="logout">Log out</button>
+			    	<button class="btn btn-default" ui-sref="main">Models</button>
+			    	<button class="btn btn-default" ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></button>
 			    </div>
 		    </div>
 		</div>
@@ -27,55 +34,54 @@
 	<div class="tb-portal">
 		<div class="td-title">
 			<div class="container">
-				<div class="row">
-					<div class="col-md-2">
-						<p>Technology</p>
-					</div>
-					<div class="col-md-4">
-						<p>Deactivation Procedure</p>
-					</div>
-					<div class="col-md-3">
-						<p>Images</p>
-					</div>
-					<div class="col-md-3">
-						<p>Videos</p>
-					</div>
+				<div class="title-sysname">
+					<p>Technology</p>
+				</div>
+				<div class="title-descr">
+					<p>Deactivation Procedure</p>
+				</div>
+				<div class="title-img">
+					<p>Images</p>
+				</div>
+				<div class="title-video">
+					<p>Videos</p>
 				</div>
 			</div>
 		</div>
 		<div class="td-content">
 			<div class="container">
-				<div class="model" ng-repeat="model in vm.carModels">
-					<div class="row row-eq-height">
-						<div class="col-md-2">
+				<div class="model" ng-repeat="model in admin.carModels">
+					<div class="model-display">
+						<div class="partial-sysname">
 							<div class="td">
-								<a href="#" editable-text="model.name" e-label="">{{ model.name || 'System Description or Name' }}</a>
+								<a href="#" editable-text="model.name" e-label="">{{ model.name || 'System Name' }}</a>
 							</div>
 	 					</div>
-						<div class="col-md-4">
+						<div class="partial-descr">
 							<div class="td">
 								<a href="#" editable-textarea="model.description" e-rows="7" e-cols="30">
-								    <pre>{{ model.description || 'Description text goes here' }}</pre>
+								    <pre>{{ model.description || 'Deactivation and Reactivation Procedure Text' }}</pre>
 								</a>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="partial-img">
 							<div class="td">
 								<div class="img-section">
 									<img class="photo" ngf-thumbnail="model.file">
+									<p ng-show="model.imgLoaded"><i class="fa fa-spinner fa-spin" style="font-size:24px" ></i> Uploading</p>
 			                        <form ng-app="fileUpload" name="form">
-			                          <div class="btn btn-primary" ngf-select="vm.onImageUpload($file, model.id)" ng-model="model.file" ngf-pattern="'image/*'"
-			                            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Place Image Here</div>
+			                          <div class="btn btn-primary" ngf-select="admin.onImageUpload($file, model.id)" ng-model="model.file" ngf-pattern="'image/*'"
+			                            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" >Place Image Here</div>
 			                          <!-- <button type="submit" ng-click="admin.submit()">submit</button> -->
 			                        </form>
 			                    </div>
 							</div>
 						</div>
-						<div class="col-md-3">
+						<div class="partial-video">
 							<div class="td section-video">
 								<youtube-video video-url="model.video"></youtube-video>
 								<div>
-									<a href="#" editable-text="model.video" e-label="" ng-click="vm.onVideoLinkClick(model.id)" onaftersave="vm.onAfterEditLink(model.id)" oncancel= "vm.onAfterEditLink(model.id)">{{ model.video || 'Load YouTube Tutorials Here' }}</a>
+									<a href="#" editable-text="model.video" e-label="" ng-click="admin.onVideoLinkClick(model.id)" onaftersave="admin.onAfterEditLink(model.id)" oncancel= "admin.onAfterEditLink(model.id)">{{ model.video || 'Load YouTube Tutorial' }}</a>
 									<!-- <img class="icon-video" src="/assets/images/player.png" ng-show="model.showVideoImg"> -->
 								</div>
 							</div>
@@ -85,7 +91,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<br/>
-						<button class="btn btn-primary" ng-click="vm.onAddRow()">Add Row</button>
+						<button class="btn btn-primary" ng-click="admin.onAddRow()">Add Row</button>
 						<br/>
 					</div>
 				</div>
@@ -99,9 +105,9 @@
 				<div class="col-md-10 col-md-offset-2">
 					<br/><br/>
 					<div class="checkbox">
-					  <label><input type="checkbox" value="verify" ng-model="verified">I verify this content is correct and approve its use by ICA.</label>
+					  <label><input type="checkbox" value="verify" ng-model="admin.verified" ng-change="admin.changeStatus()">I verify this content is correct and approve its use by ICA.</label>
 					</div>
-					<button class="btn btn-primary" ng-click="vm.onSubmit()" ng-disabled="!verified">Submit</button>
+					<button class="btn btn-primary" ng-click="admin.onSubmit()" ng-disabled="!admin.enable_submit">Submit</button>
 					<br/><br/><br/>
 					<p>Legal boilerplate on content copyrights, use by ICA members, no endorsement by ICA etc. goes here</p>
 				</div>
