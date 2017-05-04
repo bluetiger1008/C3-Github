@@ -22,5 +22,5 @@ module.exports = {
       || 'mongodb://localhost/ica'
   },
 
-  seedDB: true
+  seedDB: false
 };
